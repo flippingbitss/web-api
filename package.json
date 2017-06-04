@@ -1,5 +1,5 @@
 {
-  "name": "hapi-api",
+  "name": "web-api",
   "version": "1.0.0",
   "license": "MIT",
   "description": "Lean Hapi API Boilerplate",
@@ -10,11 +10,13 @@
   "scripts": {
     "test": "./node_modules/lab/bin/lab -v",
     "start": "npm-run-all --parallel lint start:server",
-    "start:server": "nodemon server.js",
-    "lint": "eslint . --ext .js"
+    "start:server": "npm run serve",
+    "start:dev": "nodemon lib/server.js --exec babel-node --presets es2015,stage-2",
+    "lint": "eslint . --ext .js",
+    "build": "babel lib -d dist --presets es2015,stage-2",
+    "serve": "node dist/server.js"
   },
-  "author": "Ricardo Reis",
-  "homepage": "https://github.com/rjmreis/hapi-api#readme",
+  "author": "manpreet",
   "private": false,
   "repository": {
     "type": "git",
@@ -22,7 +24,8 @@
   },
   "keywords": [
     "hapi",
-    "boilerplate"
+    "auth",
+    "api"
   ],
   "dependencies": {
     "glue": "^4.1.0",
@@ -33,6 +36,7 @@
     "hapi-auth-jwt2": "^7.2.4"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "blipp": "^2.3.0",
     "code": "^4.0.0",
     "eslint": "^3.19.0",
