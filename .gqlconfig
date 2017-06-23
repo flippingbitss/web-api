@@ -1,0 +1,28 @@
+{
+  schema: {
+    files: "lib/graphql/**/*.gql"
+  },
+  query: {
+    files: [
+      // query gql files
+      {
+        match: "lib/graphql/**/*.gql",
+        parser: "QueryParser"   
+      },
+      // [Embedded queries] relay files
+      {
+        match: {
+          include: "lib/graphql/**/*.js",
+          ignore: "**/tests/**/*.js"
+        },
+        parser: [
+          "EmbeddedQueryParser",
+          {
+            startTag: "gql`",
+            endTag: "`"
+          }
+        ]
+      }
+    ]
+  }
+}
