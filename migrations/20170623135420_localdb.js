@@ -1,35 +1,40 @@
+import Knex from 'knex'
 exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.createTable("user", function(table) {
       table.increments("id").primary();
-      table.string("username");
-      table.string("password");
-      table.string("firstname");
-      table.string("lastname");
-      table.string("email");
+      table.string("username").unique().notNullable();
+      // table.string("password");
+      table.string("firstName").notNullable();
+      table.string("lastName").notNullable();
+      table.string("email").notNullable();
+      table.integer("age").notNullable();
       table.timestamp("joinedAt").defaultTo(knex.fn.now());
     }),
 
-    knex.schema.createTable("posts", function(table) {
+    knex.schema.createTable("post", function(table) {
       table.increments("id").primary();
-      table.string("title");
-      table.string("body");
+      table.text("title").notNullable();
+      table.text("body");
+      table.integer('score').notNullable()
+      table.float('hotScore').notNullable()
       table.integer("postedBy").references("id").inTable("user");
       table.timestamp("createdAt").defaultTo(knex.fn.now());
     }),
 
-    knex.schema.createTable("comments", function(table) {
+    knex.schema.createTable("comment", function(table) {
       table.increments("id").primary();
-      table.string("content");
+      table.text("content").notNullable();
       table.integer("postedBy").references("id").inTable("user");
-      table.integer("postId").references("id").inTable("posts");
+      table.integer("postId").references("id").inTable("post");
       table.dateTime("createdAt");
     }),
 
     knex.schema.createTable("vote", function(table) {
       table.increments("id").primary();
-      table.string("vote_value");    
-      table.integer("postId").references("id").inTable("post");
+      table.integer("vote_value").notNullable();    
+      table.integer("votedBy").references("id").inTable("user");    
+      table.integer("postId").unique().references("id").inTable("post");
  
     })
   ]);
