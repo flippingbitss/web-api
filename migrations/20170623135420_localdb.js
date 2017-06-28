@@ -15,11 +15,11 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable("post", function(table) {
       table.increments("id").primary();
       table.text("title").notNullable();
-      table.text("body");
-      table.integer('score').notNullable()
-      table.float('hotScore').notNullable()
+      table.text("body").notNullable();
+      table.integer('score').notNullable().defaultTo(0)
+      table.float('hotScore').notNullable().defaultTo(0)
       table.integer("postedBy").references("id").inTable("user");
-      table.timestamp("createdAt").defaultTo(knex.fn.now());
+      table.timestamp("createdAt").notNullable().defaultTo(knex.fn.now());
     }),
 
     knex.schema.createTable("comment", function(table) {

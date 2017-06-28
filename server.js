@@ -88,7 +88,7 @@ knex.migrate.latest([config]);
 
 const server = new hapi.Server();
 
-const HOST = "localhost";
+const HOST = "0.0.0.0";
 const PORT = 8016;
 
 if (!process.env.PRODUCTION) {
