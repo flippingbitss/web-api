@@ -4,7 +4,7 @@ import { graphqlHapi, graphiqlHapi } from "graphql-server-hapi";
 import blipp from "blipp";
 import Knex from "knex";
 import Schema from "./lib/graphql/schema";
-import { Posts, Users, Comments } from "./lib/graphql/sql/handlers";
+import { Posts, Users, Comments , Answers, Questions} from "./lib/graphql/sql/handlers";
 import hapi from "hapi";
 
 const user = {
@@ -21,6 +21,22 @@ let env = "development";
 
 let knex = Knex(config[env]);
 knex.migrate.latest([config]);
+
+
+// Promise.all([
+//     knex.schema.createTable("question", function(table) {
+//       table.increments("id").primary();
+//       table.text("title").notNullable();
+//       table.integer("postedBy").references("id").inTable("user");
+//       table.timestamp("createdAt").notNullable().defaultTo(knex.fn.now());
+//     }),
+//     knex.schema.createTable("answer", function(table) {
+//       table.increments("id").primary();
+//       table.text("content").notNullable();
+//       table.integer("postedBy").references("id").inTable("user");
+//       table.integer("quesId").references("id").inTable("question");
+//       table.dateTime("createdAt");
+//     })]).then(()=> console.log("added tables to schema"))
 
 
 // knex.schema.createTable("vote", function(table) {
@@ -133,6 +149,8 @@ server.register([
           Users: new Users(),
           Posts: new Posts(),
           Comments: new Comments(),
+          Answers: new Answers(),
+          Questions: new Questions(),
           user
         }
       },
