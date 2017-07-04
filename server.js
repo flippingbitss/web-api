@@ -8,10 +8,11 @@ import { Posts, Users, Comments } from "./lib/graphql/sql/handlers";
 import hapi from "hapi";
 
 const user = {
-  userid: 1,
+  id: 1,
   username: "kevin123",
   firstName: "kevin",
-  lastname: "wong",
+  lastName: "wong",
+  age: 21,
   email: "kevinwong@email.com"
 };
 
@@ -24,10 +25,10 @@ knex.migrate.latest([config]);
 
 // knex.schema.createTable("vote", function(table) {
 //       table.increments("id").primary();
-//       table.integer("vote_value");    
-//       table.integer("votedBy").references("id").inTable("user");    
+//       table.integer("vote_value");
+//       table.integer("votedBy").references("id").inTable("user");
 //       table.integer("postId").unique().references("id").inTable("post");
- 
+
 //     }).then((e)=> console.log("creating vote table " , e))
 
 // knex.table('user').insert({
@@ -47,7 +48,7 @@ knex.migrate.latest([config]);
 //   knex.schema.dropTableIfExists("comment"),
 //   knex.schema.dropTableIfExists("post"),
 //   knex.schema.dropTableIfExists("user")
-  
+
 // ]).then(() => {
 //   console.log("destroyed schema");
 //   Promise.all([
