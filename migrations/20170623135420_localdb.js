@@ -8,6 +8,9 @@ exports.up = function(knex, Promise) {
       table.string("firstName").notNullable();
       table.string("lastName").notNullable();
       table.string("email").notNullable();
+      table.string("gender", 1).notNullable();
+      table.string("occupation");
+      table.string("education");
       table.integer("age").notNullable();
       table.timestamp("joinedAt").defaultTo(knex.fn.now());
     }),
@@ -60,6 +63,6 @@ exports.down = function(knex, Promise) {
     knex.schema.dropTable("user"),
     knex.schema.dropTable("post"),
     knex.schema.dropTable("answer"),
-    knex.schema.dropTable("question"),
+    knex.schema.dropTable("question")
   ]);
 };
