@@ -23,6 +23,7 @@ exports.up = function(knex, Promise) {
       table.float("hotScore").notNullable().defaultTo(0);
       table.integer("postedBy").references("id").inTable("user");
       table.timestamp("createdAt").notNullable().defaultTo(knex.fn.now());
+      table.string("imageUri");
     }),
 
     knex.schema.createTable("question", function(table) {
