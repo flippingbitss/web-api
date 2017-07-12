@@ -29,19 +29,11 @@ let knex = Knex(config[env]);
 knex.migrate.latest([config]);
 
 // Promise.all([
-//     knex.schema.createTable("question", function(table) {
+//    knex.schema.createTable("tag", function(table) {
 //       table.increments("id").primary();
-//       table.text("title").notNullable();
-//       table.integer("postedBy").references("id").inTable("user");
-//       table.timestamp("createdAt").notNullable().defaultTo(knex.fn.now());
-//     }),
-//     knex.schema.createTable("answer", function(table) {
-//       table.increments("id").primary();
-//       table.text("content").notNullable();
-//       table.integer("postedBy").references("id").inTable("user");
-//       table.integer("quesId").references("id").inTable("question");
-//       table.dateTime("createdAt");
-//     })]).then(()=> console.log("added tables to schema"))
+//       table.string("tagName").notNullable();
+//       table.integer("selectedBy").references("id").inTable("user");
+//     })]).then(()=> console.log("added table to schema"))
 
 // knex.schema.createTable("vote", function(table) {
 //       table.increments("id").primary();
