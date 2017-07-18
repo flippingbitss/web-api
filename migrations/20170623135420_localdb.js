@@ -12,6 +12,7 @@ exports.up = function(knex, Promise) {
       table.string("occupation");
       table.string("education");
       table.integer("age").notNullable();
+      table.integer("reputation").notNullable().defaultTo(0);
       table.timestamp("joinedAt").defaultTo(knex.fn.now());
     }),
 
