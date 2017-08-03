@@ -21,7 +21,7 @@ const user = {
   lastName: "wong",
   age: 21,
   email: "kevinwong@email.com",
-  reputation: 9000
+  reputation: 900
 };
 
 let config = require("./knexfile");
