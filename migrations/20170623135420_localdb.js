@@ -8,6 +8,7 @@ exports.up = function(knex, Promise) {
       table.string("firstName").notNullable();
       table.string("lastName").notNullable();
       table.string("email").notNullable();
+      table.string("authorImg");
       table.string("gender", 1).notNullable();
       table.string("occupation");
       table.string("education");
@@ -55,7 +56,12 @@ exports.up = function(knex, Promise) {
       table.integer("votedBy").references("id").inTable("user");
       table.integer("postId").unique().references("id").inTable("post");
     }),
-
+    knex.schema.createTable("event", function(table) {
+      table.increments("id").primary();
+      table.string("name").notNullable();
+      table.dateTime("selectedDate")
+      table.integer("postedBy").references("id").inTable("user");
+    }),
     knex.schema.createTable("tag", function(table) {
       table.increments("id").primary();
       table.string("tagName").notNullable();

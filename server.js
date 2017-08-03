@@ -10,7 +10,8 @@ import {
   Users,
   Comments,
   Answers,
-  Questions
+  Questions,
+  Events
 } from "./lib/graphql/sql/handlers";
 
 const user = {
@@ -43,7 +44,6 @@ knex.migrate.latest([config]);
 //       table.integer("postId").unique().references("id").inTable("post");
 
 //     }).then((e)=> console.log("creating vote table " , e))
-
 const app = express();
 const PORT = 8016;
 
@@ -68,6 +68,7 @@ app.use(
       Comments: new Comments(),
       Answers: new Answers(),
       Questions: new Questions(),
+      Events: new Events(),
       S3: new S3(),
       user
     }
